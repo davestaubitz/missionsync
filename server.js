@@ -15,10 +15,11 @@ const SAP_URL = 'https://104.196.25.205:50000/b1s/v2';
 
 app.get('/', (req, res) => res.json({ status: 'ok', target: SAP_URL }));
 
-app.all('/sap/*', async (req, res) => {
+app.all('/b1s/v2/*', async (req, res) => {
   try {
-    const path = req.path.replace('/sap/', '');
-    const url = `${SAP_URL}/${path}${req.url.includes('?') ? req.url.substring(req.url.indexOf('?')) : ''}`;
+    const path = req.path.replace('/b1s/v2', '');
+    const url = `${SAP_URL}${path}${req.url.includes('?') ? req.url.substring(req.url.indexOf('?')) : ''}`;
+
     
     const response = await axios({
       method: req.method,
